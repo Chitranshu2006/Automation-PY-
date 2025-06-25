@@ -42,7 +42,7 @@ def speak_message ():
     return x
 
 def set_data ():
-    speak ("Enter 1 for typing the phone number or 2 for speaking the phone number : ")
+    speak ("Enter 1 for typing the phone number or 2 for speaking the phone number (eg. :- +919876543210) : ")
     choice = int(input("Enter 1 for typing the phone number or 2 for speaking the phone number : "))
     if choice == 1 :
         phone_number = type_message ()
