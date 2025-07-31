@@ -16,6 +16,31 @@ import os
 import pyautogui
 import time
 from typing import Optional, List
+import pywhatkit as kit
+import speech_recognition as sr
+import pyttsx3
+
+# Initialize the speech engine
+engine = pyttsx3.init()
+
+# Speak function using pyttsx3
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+# Function to listen to user's voice
+def listen():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+        try:
+            command = recognizer.recognize_google(audio)
+            print(f"You said: {command}")
+            return command
+        except sr.UnknownValueError:
+            speak("Sorry, I did not understand that. Please try again.")
+            return listen()
 
 # --- Configuration ---
 GROQ_API_KEY = "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"
@@ -468,6 +493,10 @@ async def Automation(commands: list[str]):
 
 
 if __name__ == "__main__":
+    speak("Welcome to automation sir.")
+    q = 1
     while True:
-        Task = input("Enter a natural language command for automation: ")
+        speak (f"What is the task {q} sir")
+        Task = listen()
         asyncio.run(main(Task))
+        q += 1
